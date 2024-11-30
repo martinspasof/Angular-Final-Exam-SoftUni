@@ -1,0 +1,24 @@
+<h1>Current Book</h1>
+<div class="container px-4 px-lg-5">
+    <div class="col-md-4 mb-5">
+        <div class="card h-100" >
+            <div class="card-header" style="background-image: url('{{book.image}}');"></div>
+            <div class="card-body">
+                <h2 class="card-title">{{book.bookName}}</h2>
+                <p class="card-text">{{book.description}}</p>
+            </div>
+
+            <div class="card-footer">
+                @if (isOwner){
+                    <div class="details-btn">
+                        <a class="btn btn-primary btn-sm" routerLink="/books/{{book._id}}/edit" id="edit-button">Edit</a>
+                        <a class="btn btn-primary btn-sm"  routerLink="/books/{{book._id}}/delete" id="delete-button">Delete</a>
+        
+                    </div>
+                }
+
+                <p style="float: right; clear: right;">Likes: <span>{{ booksLikesList }}</span></p>
+            </div>
+        </div>
+    </div>
+</div>

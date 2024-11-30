@@ -1,0 +1,96 @@
+<section style="background-color: #508bfc;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <form #form="ngForm" (ngSubmit)="createBook(form)">
+                            <!-- <form> -->
+                            <h3 class="mb-5">New Book</h3>
+
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <div data-mdb-input-init class="form-outline">
+                                        <input 
+                                        type="text" 
+                                        id="bookName" 
+                                        name="bookName"
+                                        class="form-control" 
+                                        ngModel
+                                        #inputTitle="ngModel" 
+                                        required
+                                        minlength="5"
+                                        />
+                                        <label class="form-label" for="form6Example1">Title</label>
+                                    </div>
+                                </div>
+                            </div>
+                            @if(inputTitle?.touched){
+                                <div>
+                                    @if(inputTitle?.errors?.['required']){
+                                        <p class="error">Book title is required!</p>
+                                    }
+                
+                                    @if(inputTitle?.errors?.['minlength']){
+                                        <p class="error">Book title must be at least 5 characters!</p>
+                                    }
+                                </div>
+                            }
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <input 
+                                type="text" 
+                                id="image" 
+                                class="form-control"
+                                name = "image"
+                                ngModel
+                                #inputImage="ngModel" 
+                                required
+                                />
+                                <label class="form-label" for="form6Example3">Image URL</label>
+                            </div>
+
+                            @if(inputImage?.touched){
+                                <div>
+                                    @if(inputImage?.errors?.['required']){
+                                        <p class="error">Image URL is required!</p>
+                                    }
+                                </div>
+                            }
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <textarea 
+                                class="form-control" 
+                                id="description" 
+                                name="description"
+                                rows="4"
+                                ngModel
+                                #inputText="ngModel" 
+                                required
+                                minlength="10"
+                                >
+                            </textarea>
+                                <label class="form-label" for="form6Example7">Additional information</label>
+                            </div>
+                            @if(inputText?.touched){
+                                <div>
+                                    @if(inputText?.errors?.['required']){
+                                        <p class="error">Description is required!</p>
+                                    }
+                
+                                    @if(inputText?.errors?.['minlength']){
+                                        <p class="error">Description must be at least 10 characters!</p>
+                                    }
+                                </div>
+                            }
+
+
+                            <button data-mdb-ripple-init  class="btn btn-primary btn-block mb-4">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
