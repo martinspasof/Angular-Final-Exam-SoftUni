@@ -5,7 +5,7 @@ const { bookController } = require('../controllers');
 
 // middleware that is specific to this router
 
-router.post('/', auth(), bookController.createBook);
+router.post('/createBook', auth(), bookController.createBook);
 router.get('/', bookController.getBooks);
 router.get('/latestBooks', bookController.getLatestsBooks);
 router.delete('/:bookId', auth(), bookController.deleteBook);

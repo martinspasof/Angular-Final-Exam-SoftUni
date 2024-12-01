@@ -8,12 +8,10 @@ const bookSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        // required: true,
         validate: /^https?:\/\//,
     },
     description: {
         type: String,
-        // required: true,
         minLength: 10
     }, 
     userId: {
@@ -24,10 +22,6 @@ const bookSchema = new mongoose.Schema({
         type: ObjectId,
         ref: 'User'
     }],
-    owner: {
-        type: ObjectId,
-        ref: 'User'
-    },
 }, { timestamps: { createdAt: 'created_at' } });
 
 module.exports = mongoose.model('Book', bookSchema);

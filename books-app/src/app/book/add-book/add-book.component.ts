@@ -27,9 +27,7 @@ export class AddBookComponent {
       
       this.router.navigate(['/books']);
     });
-    
-    // this.userService.login();
-    // 
+
   }
 
 }

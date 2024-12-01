@@ -12,14 +12,14 @@
                   type="email" 
                   class="form-control form-control-lg"
                   name="email" 
-                  id="typeEmailX-2" 
-                  placeholder="john.doe@gmail.com" 
+                  id="email" 
+                  placeholder="johndoe@gmail.com" 
                   ngModel
                   #inputEmail="ngModel" 
                   required
                   [appEmail]="domains"
                   />
-                  <label class="form-label" for="typeEmailX-2">Email</label>
+                  <label class="form-label" for="typeEmailX-2">Email (gmail, abv, yahoo)</label>
                 </div>
 
                 @if(inputEmail?.touched){
@@ -39,14 +39,14 @@
                   class="form-control form-control-lg"
                   type="password" 
                   name="password" 
-                  id="typePasswordX-2" 
+                  id="pass"
                   placeholder="******"
                   ngModel
                   #inputPassword="ngModel" 
                   required
                   minlength="5"
                   />
-                  <label class="form-label" for="typePasswordX-2">Password</label>
+                  <label class="form-label" for="pass">Password</label>
                 </div>
                 @if(inputPassword?.touched){
                     <div>

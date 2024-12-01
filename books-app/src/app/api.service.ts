@@ -19,7 +19,7 @@ export class ApiService {
   }
 
   getLatestBooks(limit?: number){
-    
+
     let url = `/api/books/latestBooks`;
     if(limit){
       url += `?limit=${limit}`;
@@ -36,7 +36,7 @@ export class ApiService {
   createBook(bookName: string, image: string, description: string){
    
     const payload = { bookName, image, description };
-    return this.http.post<Book>(`/api/books`, payload);
+    return this.http.post<Book>(`/api/books/createBook`, payload);
   }
 
   updateBook(bookId: string, bookName: string, image: string, description: string) {

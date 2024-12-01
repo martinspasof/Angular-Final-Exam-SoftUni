@@ -25,28 +25,22 @@ function createBook(req, res, next) {
   
     const { bookName, image, description } = req.body;  
     
-    const { _id: userId } = req.user;
+    const { _id: userId } = req.user;  
 
-    console.log({ bookName, image, description });
-    
-
-    bookModel.create({ bookName, userId })
+    bookModel.create({ bookName, image, description, userId })
         .then(book => {
-            newBook(bookName, image, description, userId, book._id)
-                .then(([_, updatedBook]) => res.status(200).json(updatedBook))
+            return Promise.all([
+                userModel.updateOne({ _id: userId }, { $push: { books: book._id }, $addToSet: { books: book._id } }),
+            ]) 
+            .then(([updatedBook, _, __]) => {
+                if (updatedBook) {
+                    res.status(200).json(updatedBook)
+                }
+            })
+            .catch(next);
         })
         .catch(next);
 }
-
-function newBook(bookName, image, description, userId, bookId) {
-    return bookModel.create({ bookName, image, description, userId, bookId })
-        .then(book => {
-            return Promise.all([
-                userModel.updateOne({ _id: userId }, { $push: { books: book._id }, $addToSet: { books: bookId } }),
-            ])
-        })
-}
-
 
 function getLatestsBooks(req, res, next) {
     const limit = Number(req.query.limit) || 0;
@@ -68,7 +62,6 @@ function editBook(req, res, next) {
     const { bookName, image, description } = req.body;
     const { _id: userId } = req.user; 
 
-    // if the userId is not the same as this one of the post, the post will not be updated
     bookModel.findOneAndUpdate({ _id: bookId, userId }, { bookName, image, description }, { new: true })
         .then(updatedBook => {
             if (updatedBook) {
