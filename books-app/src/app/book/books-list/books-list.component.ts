@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { Book } from '../../types/book';
@@ -13,19 +13,35 @@ import { RouterLink } from '@angular/router';
   templateUrl: './books-list.component.html',
   styleUrl: './books-list.component.css'
 })
-export class BooksListComponent implements OnInit {
+export class BooksListComponent {
   books: Book[] = [];
   isLoading = true;
+
+  @Input() latestBooks?: number;
 
   constructor(private apiService: ApiService){}
 
   ngOnInit(){
 
-    this.apiService.getBooks().subscribe(books=> {
-      this.books = books;
+    if(this.latestBooks){
+      this.apiService.getLatestBooks(this.latestBooks).subscribe(books=> {
+        this.books = books;
+        
+  
+        this.isLoading = false;      
+      });
 
-      this.isLoading = false;      
-    });
+    } else {
+
+      this.apiService.getBooks().subscribe(books=> {
+        this.books = books;
+        
+  
+        this.isLoading = false;      
+      });
+
+    }
+
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BooksListComponent } from '../book/books-list/books-list.component';
 
@@ -10,5 +10,7 @@ import { BooksListComponent } from '../book/books-list/books-list.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+  @Input() latestBooks?: number;
 
 }

@@ -11,22 +11,16 @@
             <div class="card-footer">
                 @if (isOwner){
                     <div class="details-btn">
-
                         <a class="btn btn-primary btn-sm" routerLink="/edit-book/{{book._id}}" id="edit-button">Edit</a>
-                        <a class="btn btn-primary btn-sm" href="#!" (click)="deleteBook()" id="delete-button">Delete</a>
-
-                        <!-- <a class="btn btn-primary btn-sm" routerLink="/books/{{book._id}}/edit" id="edit-button">Edit</a>
-                        <a class="btn btn-primary btn-sm"  routerLink="/books/{{book._id}}/delete" id="delete-button">Delete</a> -->
-        
+                        <a class="btn btn-primary btn-sm" (click)="deleteBook()" id="delete-button">Delete</a>       
                     </div>
                 }
 
                 @else if (isLiked){
-                <p id="liked-book" class="liked-book hidden">You've already liked this book.</p>
+                    <p id="liked-book" class="liked-book hidden">You've already liked this book.</p>
                 }
                 @else {
-                <!-- <a id="like-button" class="like-book-btn" routerLink="/like/{{book._id}}">Like</a> -->
-                <a id="like-button" class="like-book-btn" (click)="likeBook()">Like</a>
+                    <a id="like-button" class="like-book-btn" (click)="likeBook()">Like</a>
                 }
 
                 <p style="float: right; clear: right;">Likes: <span>{{ booksLikesList }}</span></p>

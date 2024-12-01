@@ -31,8 +31,7 @@ export class CurrentBookComponent implements OnInit {
   
   get username(): string {
     return this.userService.user?.username || '';
-  }
-  
+  }  
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['bookId'];    
@@ -45,7 +44,6 @@ export class CurrentBookComponent implements OnInit {
       this.book = book;
     });
   }
-
 
   likeBook() {
     const id = this.route.snapshot.params['bookId'];
@@ -60,11 +58,11 @@ export class CurrentBookComponent implements OnInit {
     });
   }
 
-
   deleteBook(){
     const id = this.route.snapshot.params['bookId'];
 
     this.apiService.deleteBook(id).subscribe(() => {
+     
       this.router.navigate(['/books']);
     });
   }

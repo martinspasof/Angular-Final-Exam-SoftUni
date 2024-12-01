@@ -7,22 +7,9 @@ const { bookController } = require('../controllers');
 
 router.post('/', auth(), bookController.createBook);
 router.get('/', bookController.getBooks);
-router.delete('/books/:bookId', auth(), bookController.deleteBook);
+router.get('/latestBooks', bookController.getLatestsBooks);
+router.delete('/:bookId', auth(), bookController.deleteBook);
 router.put('/:bookId', auth(), bookController.editBook);
-
-
 router.get('/:bookId', bookController.getBook);
-
-
-// router.get('/', bookController.getThemes);
-// router.post('/', auth(), bookController.createTheme);
-
-// router.get('/:themeId', bookController.getTheme);
-// router.post('/:themeId', auth(), postController.createPost);
-// router.put('/:themeId', auth(), bookController.subscribe);
-// router.put('/:themeId/posts/:postId', auth(), postController.editPost);
-// router.delete('/:themeId/posts/:postId', auth(), postController.deletePost);
-
-// router.get('/my-trips/:id/reservations', auth(), bookController.getReservations);
 
 module.exports = router

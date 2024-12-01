@@ -43,7 +43,6 @@ function newBook(bookName, image, description, userId, bookId) {
         .then(book => {
             return Promise.all([
                 userModel.updateOne({ _id: userId }, { $push: { books: book._id }, $addToSet: { books: bookId } }),
-                // bookModel.findByIdAndUpdate({ _id: bookId }, { $push: { books: book._id, bookName, image, description }, $addToSet: { owner: userId } }, { new: true })
             ])
         })
 }
@@ -84,11 +83,11 @@ function editBook(req, res, next) {
 
 function deleteBook(req, res, next) {
     const { bookId } = req.params;
-    const { _id: userId } = req.user;
-
+    const { _id: userId } = req.user;  
+    
     Promise.all([
-        userModel.findOneAndUpdate({ _id: userId }, { $pull: { books: bookId } }),
-        bookModel.findOneAndUpdate({ _id: bookId }, { $pull: { books: bookId } }),
+
+        bookModel.findByIdAndDelete({ _id: bookId }),
     ])
         .then(([deletedOne, _, __]) => {
             if (deletedOne) {
@@ -109,23 +108,12 @@ function like(req, res, next) {
         .catch(next)
 }
 
-// function subscribe(req, res, next) {
-//     const bookId = req.params.bookId;
-//     const { _id: userId } = req.user;
-//     bookModel.findByIdAndUpdate({ _id: bookId }, { $addToSet: { subscribers: userId } }, { new: true })
-//         .then(updatedBook => {
-//             res.status(200).json(updatedBook)
-//         })
-//         .catch(next);
-// }
-
 module.exports = {
     getBooks,
     getBook,
+    getLatestsBooks,
     createBook,
     deleteBook,
     editBook,
     like
-    
-    // subscribe,
 }

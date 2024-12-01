@@ -40,15 +40,7 @@ export const routes: Routes = [
             canActivate: [AuthGuard] 
         },
 
-    ] },    
-    // { path: 'like', children: [
-    //     {
-    //         path: ':bookId',
-    //         component: CurrentBookComponent,
-    //         canActivate: [AuthGuard] 
-    //     },
-
-    // ] },  
+    ] },
     // End - Book routing
 
     // Start - About routing

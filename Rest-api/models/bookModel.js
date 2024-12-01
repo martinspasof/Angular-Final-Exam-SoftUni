@@ -11,10 +11,6 @@ const bookSchema = new mongoose.Schema({
         // required: true,
         validate: /^https?:\/\//,
     },
-    // subscribers: [{
-    //     type: ObjectId,
-    //     ref: "User"
-    // }],
     description: {
         type: String,
         // required: true,

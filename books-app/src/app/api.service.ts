@@ -18,6 +18,16 @@ export class ApiService {
     return this.http.get<Book[]>(url);
   }
 
+  getLatestBooks(limit?: number){
+    
+    let url = `/api/books/latestBooks`;
+    if(limit){
+      url += `?limit=${limit}`;
+    }
+
+    return this.http.get<Book[]>(url);
+  }
+
   getSingleBook(id:string){
 
     return this.http.get<Book>(`/api/books/${id}`);
@@ -34,8 +44,8 @@ export class ApiService {
     return this.http.put<Book>(`/api/books/${bookId}`, payload);
   }
 
-  // delete -> http.delete theme ID
-  deleteBook(bookId: string) {
+  deleteBook(bookId: string) { 
+    
     return this.http.delete(`/api/books/${bookId}`);
   }
 
