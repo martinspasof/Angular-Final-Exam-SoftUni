@@ -22,3 +22,39 @@ h1 {
     background-size: 406px 305px;
 }
 
+.details-btn {
+    margin-left: 72px;
+}
+
+#delete-button {
+    margin-left: 100px;
+}
+
+#edit-button {
+    width: 60.79px;
+    height: 31px;
+}
+
+.liked-book {
+    margin-top: 20px;
+    color: #ffb74d;
+    font-weight: bold;
+}
+
+
+.like-book-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.like-book-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.like-book-btn:disabled {
+    background-color: #555;
+}

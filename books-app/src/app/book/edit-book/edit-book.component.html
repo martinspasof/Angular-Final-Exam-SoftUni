@@ -5,34 +5,34 @@
                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
 
-                        <form #form="ngForm" (ngSubmit)="createBook(form)">
+                        <form [formGroup]="form" (ngSubmit)="updateBook()">
                             <!-- <form> -->
-                            <h3 class="mb-5">New Book</h3>
+                            <h3 class="mb-5">Edit Book</h3>
 
                             <div class="row mb-4">
                                 <div class="col">
                                     <div data-mdb-input-init class="form-outline">
                                         <input 
                                         type="text" 
+                                        class="form-control"
                                         id="bookName" 
                                         name="bookName"
-                                        class="form-control" 
-                                        ngModel
-                                        #inputTitle="ngModel" 
+                                        value="{{book.bookName}}"
                                         required
                                         minlength="5"
+                                        formControlName="bookName"
                                         />
                                         <label class="form-label" for="form6Example1">Title</label>
                                     </div>
                                 </div>
                             </div>
-                            @if(inputTitle?.touched){
+                            @if(form.get('bookName')?.touched){
                                 <div>
-                                    @if(inputTitle?.errors?.['required']){
+                                    @if(form.get('bookName')?.errors?.['required']){
                                         <p class="error">Book title is required!</p>
                                     }
                 
-                                    @if(inputTitle?.errors?.['minlength']){
+                                    @if(form.get('bookName')?.errors?.['minlength']){
                                         <p class="error">Book title must be at least 5 characters!</p>
                                     }
                                 </div>
@@ -43,23 +43,22 @@
                                 type="text" 
                                 id="image" 
                                 class="form-control"
+                                formControlName="image"
                                 name = "image"
-                                ngModel
-                                #inputImage="ngModel" 
+                                value="{{book.image}}"
                                 required
                                 minlength="5"
                                 />
                                 <label class="form-label" for="form6Example3">Image URL</label>
-
                             </div>
 
-                            @if(inputImage?.touched){
+                            @if(form.get('image')?.touched){
                                 <div>
-                                    @if(inputImage?.errors?.['required']){
+                                    @if(form.get('image')?.errors?.['required']){
                                         <p class="error">Image URL is required!</p>
                                     }
 
-                                    @if(inputImage?.errors?.['minlength']){
+                                    @if(form.get('image')?.errors?.['minlength']){
                                         <p class="error">Image URL must be at least 5 characters!</p>
                                     }
                                 </div>
@@ -67,32 +66,32 @@
 
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <textarea 
-                                class="form-control" 
+                                formControlName="description"
                                 id="description" 
                                 name="description"
+                                class="form-control"
                                 rows="4"
-                                ngModel
-                                #inputText="ngModel" 
+                                value="{{book.description}}"
                                 required
                                 minlength="10"
                                 >
                             </textarea>
                                 <label class="form-label" for="form6Example7">Additional information</label>
                             </div>
-                            @if(inputText?.touched){
+                            @if(form.get('description')?.touched){
                                 <div>
-                                    @if(inputText?.errors?.['required']){
+                                    @if(form.get('description')?.errors?.['required']){
                                         <p class="error">Description is required!</p>
                                     }
                 
-                                    @if(inputText?.errors?.['minlength']){
+                                    @if(form.get('description')?.errors?.['minlength']){
                                         <p class="error">Description must be at least 10 characters!</p>
                                     }
                                 </div>
                             }
 
 
-                            <button data-mdb-ripple-init  class="btn btn-primary btn-block mb-4">Add</button>
+                            <button data-mdb-ripple-init  class="btn btn-primary btn-block mb-4">Edit</button>
                         </form>
                     </div>
                 </div>

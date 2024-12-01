@@ -64,9 +64,10 @@ function getLatestsBooks(req, res, next) {
 
 
 function editBook(req, res, next) {
+    
     const { bookId } = req.params;
     const { bookName, image, description } = req.body;
-    const { _id: userId } = req.user;
+    const { _id: userId } = req.user; 
 
     // if the userId is not the same as this one of the post, the post will not be updated
     bookModel.findOneAndUpdate({ _id: bookId, userId }, { bookName, image, description }, { new: true })
@@ -86,7 +87,7 @@ function deleteBook(req, res, next) {
     const { _id: userId } = req.user;
 
     Promise.all([
-        userModel.findOneAndUpdate({ _id: userId }, { $pull: { books: userId } }),
+        userModel.findOneAndUpdate({ _id: userId }, { $pull: { books: bookId } }),
         bookModel.findOneAndUpdate({ _id: bookId }, { $pull: { books: bookId } }),
     ])
         .then(([deletedOne, _, __]) => {
@@ -103,7 +104,7 @@ function like(req, res, next) {
     const { bookId } = req.params;
     const { _id: userId } = req.user;
 
-    bookModel.updateOne({ _id: bookId }, { $addToSet: { likes: userId } }, { new: true })
+    bookModel.updateOne({ _id: bookId }, { $addToSet: { likedList: userId } }, { new: true })
         .then(() => res.status(200).json({ message: 'Liked successful!' }))
         .catch(next)
 }
@@ -122,6 +123,8 @@ module.exports = {
     getBooks,
     getBook,
     createBook,
+    deleteBook,
+    editBook,
     like
     
     // subscribe,

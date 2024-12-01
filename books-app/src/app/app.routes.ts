@@ -9,6 +9,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AddBookComponent } from './book/add-book/add-book.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ErrorComponent } from './error/error.component';
+import { EditBookComponent } from './book/edit-book/edit-book.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -32,6 +33,22 @@ export const routes: Routes = [
         ]
     },
     { path: 'add-book', component: AddBookComponent, canActivate: [AuthGuard] },    
+    { path: 'edit-book', children: [
+        {
+            path: ':bookId',
+            component: EditBookComponent,
+            canActivate: [AuthGuard] 
+        },
+
+    ] },    
+    // { path: 'like', children: [
+    //     {
+    //         path: ':bookId',
+    //         component: CurrentBookComponent,
+    //         canActivate: [AuthGuard] 
+    //     },
+
+    // ] },  
     // End - Book routing
 
     // Start - About routing

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Book } from './types/book';
+import { Book, Like } from './types/book';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,11 @@ export class ApiService {
   // delete -> http.delete theme ID
   deleteBook(bookId: string) {
     return this.http.delete(`/api/books/${bookId}`);
+  }
+
+  isLiked(bookId: string) {
+    const payload = { bookId };
+    return this.http.put<Like>(`/api/likes/${bookId}`, payload);
   }
 
 }

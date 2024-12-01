@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const { auth } = require('../utils');
-const { bookController, postController } = require('../controllers');
+const { bookController } = require('../controllers');
 
 // middleware that is specific to this router
 
 router.post('/', auth(), bookController.createBook);
 router.get('/', bookController.getBooks);
-router.delete('/books/:bookId/', auth(), bookController.deleteBook);
+router.delete('/books/:bookId', auth(), bookController.deleteBook);
+router.put('/:bookId', auth(), bookController.editBook);
 
 
 router.get('/:bookId', bookController.getBook);

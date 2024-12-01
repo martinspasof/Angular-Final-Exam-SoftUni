@@ -13,3 +13,7 @@ export interface Book {
   updatedAt: string;
   __v: number;
 }
+
+export interface Like {
+  _id: string;
+}

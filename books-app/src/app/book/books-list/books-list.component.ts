@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { Book } from '../../types/book';
@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './books-list.component.html',
   styleUrl: './books-list.component.css'
 })
-export class BooksListComponent {
+export class BooksListComponent implements OnInit {
   books: Book[] = [];
   isLoading = true;
 
