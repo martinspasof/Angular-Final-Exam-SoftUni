@@ -13,7 +13,7 @@ Here is the response we get:
 {
     "name": "rest-api",
     "version": "1.0.0",
-    "description": "REST-api for back-end of Angular course workshop in SoftUni",
+    "description": "REST-api for back-end of Angular course workshop and final exam project in SoftUni",
     "main": "index.js",
 }
 ```
@@ -76,8 +76,6 @@ Code: 200
 Content: 
 ``` 
 {
-    "themes": [],
-    "posts": [],
     "_id": "5f1875690916010017964978",
     "name": "John Doe",
     "email": "john@email.com",
@@ -127,8 +125,6 @@ Code: 200
 Content: 
 ``` 
 {
-    "themes": ["5f85c51996b5601b2406e5b7"],
-    "posts": ["5f86bdcde012743fe4f5b324"],
     "_id": "5f1875690916010017964978",
     "name": "John Doe",
     "email": "john@email.com",
@@ -167,15 +163,17 @@ Content:
 }
 ```
 
-# Endpoints: Themes
+# Endpoints: Books
 
-* ```/themes```
-* ```/themes/:themeId```
+* ```/books```
+* ```/books/:bookId```
+* ```/books/createBook```
+* ```/books/latestBooks```
 
-## Get Themes
-Returns all themes as json.
+## Get Books
+Returns all books as json.
 
-### URL --> ```/themes```
+### URL --> ```/books```
 
 ### Method --> ```GET```
 
@@ -187,10 +185,11 @@ Content:
 ``` 
 [
     {
-        "subscribers": ["5f8580d25d1da62568dd38fd"],
-        "posts": ["5f858dd2d895ad23602db9d5"],
         "_id": "5f858dd2d895ad23602db9d4",
-        "themeName": "Some Theme",
+        "likedList": ['674a195e27ce7cc2a566855a'],
+        "bookName": "Some Book",
+        "image": "https://host/someBook.png",
+        "description": "Some Book description",
         "userId": "5f8580d25d1da62568dd38fd",
         "created_at": "2020-10-13T11:21:54.863Z",
         "updatedAt": "2020-10-13T11:21:54.898Z",
@@ -210,26 +209,27 @@ Content:
 }
 ```
 
-## Post Theme
-Creates new Theme with the first post of the author and returns the theme as json.
+## Create Book
+Creates new Book with the first post of the author and returns the book as json.
 
-### URL --> ```/themes```
+### URL --> ```/books/createBook```
 
 ### Method --> ```POST```
 
 ### Body -->
 
 ```
-{
-    "themeName": "Some Theme Title",
-    "postText": "Some Post text"
-}
+    {
+        "likedList": [],
+        "bookName": "Some Book",
+        "image": "https://host/someBook.png",
+        "description": "Some Book description",
+        "userId": "5f8580d25d1da62568dd38fd",
+        "created_at": "2020-10-13T11:21:54.863Z",
+        "updatedAt": "2020-10-13T11:21:54.898Z",
+    }
 ```
 
-Required:
-
-```themeName``` : [string] -- The Title of your new Theme, which you want to create
-```postText``` : [string] -- The text of your post. This post will be append as first comment on your Theme.
 
 ### Success Response:
 
@@ -238,10 +238,9 @@ Code: 200
 Content: 
 ``` 
 {
-    "subscribers": ["5f86c1f0a112c130e89964af"],
-    "posts": ["5f86c38abfa44331a0ff0094"],
     "_id": "5f86c38abfa44331a0ff0093",
-    "themeName": "Some Theme Title",
+    "likedList": []
+    "bookName": "Some Book",
     "userId": "5f86c1f0a112c130e89964af",
     "created_at": "2020-10-14T09:23:22.102Z",
     "updatedAt": "2020-10-14T09:23:22.114Z",
@@ -260,72 +259,13 @@ Content:
 }
 ```
 
-## Create Post
-Creates new Post of the author and returns the theme as json.
+## Edit Book
+Edit Book if the user is the author of the book and returns the changed book.
 
-### URL --> ```/themes/:themeId```
-
-### Method --> ```POST```
-
-### Body -->
-
-```
-{
-    "postText": "Some Post text"
-}
-```
-
-### Success Response:
-
-Code: 200
-
-Content: 
-``` 
-{
-"subscribers": ["5f8580d25d1da62568dd38fd"],
-"posts": [
-    "5f85ad8f1141b13a04a9139c",
-    "5f85b2501141b13a04a9139d"
-],
-"_id": "5f858dd2d895ad23602db9d4",
-"themeName": "Some Theme",
-"userId": "5f8580d25d1da62568dd38fd",
-"created_at": "2020-10-13T11:21:54.863Z",
-"updatedAt": "2020-10-13T13:57:36.466Z",
-"__v": 0
-}
-```
-
-### Error Response:
-
-Code: 500 Internal Server Error
-
-Content: 
-```
-{
-    message: "Something went wrong!"
-}
-```
-
-# Endpoints: Posts
-
-* ```/themes/:themeId/posts/:postId```
-
-## Edit Post
-Edit Post if the user is the author of the post and returns the changed post.
-
-### URL --> ```/themes/:themeId/posts/:postId```
+### URL --> ```/books/:bookId```
 
 ### Method --> ```PUT```
 
-### Body -->
-
-```
-{
-    "postText": "Changed text"
-}
-```
-
 ### Success Response:
 
 Code: 200
@@ -333,13 +273,12 @@ Code: 200
 Content: 
 ``` 
 {
-    "likes": [],
-    "_id": "5f86c3fcbfa44331a0ff0095",
-    "text": "Changed text",
+    "_id": "5f86c38abfa44331a0ff0093",
+    "likedList": []
+    "bookName": "Some Book",
     "userId": "5f86c1f0a112c130e89964af",
-    "themeId": "5f85c51996b5601b2406e5b7",
-    "created_at": "2020-10-14T09:25:16.203Z",
-    "updatedAt": "2020-10-14T09:31:45.021Z",
+    "created_at": "2020-10-14T09:23:22.102Z",
+    "updatedAt": "2020-10-14T09:23:22.114Z",
     "__v": 0
 }
 ```
@@ -364,10 +303,10 @@ Content:
 }
 ```
 
-## Delete Post
-Deletes Post if the user is the author of the post and returns the deleted post.
+## Delete Book
+Deletes Book if the user is the author of the book and returns the deleted book.
 
-### URL --> ```/themes/:themeId/posts/:postId```
+### URL --> ```/books/:bookId```
 
 ### Method --> ```DELETE```
 
@@ -378,13 +317,12 @@ Code: 200
 Content: 
 ``` 
 {
-    "likes": [],
-    "_id": "5f86c3fcbfa44331a0ff0095",
-    "text": "Changed text",
+    "_id": "5f86c38abfa44331a0ff0093",
+    "likedList": []
+    "bookName": "Some Book",
     "userId": "5f86c1f0a112c130e89964af",
-    "themeId": "5f85c51996b5601b2406e5b7",
-    "created_at": "2020-10-14T09:25:16.203Z",
-    "updatedAt": "2020-10-14T09:33:56.595Z",
+    "created_at": "2020-10-14T09:23:22.102Z",
+    "updatedAt": "2020-10-14T09:23:22.114Z",
     "__v": 0
 }
 ```
@@ -408,10 +346,10 @@ Content:
     message: "Something went wrong!"
 }
 ```
-## Like Post
-Adds like to the post.
+## Like book
+Adds like to the book.
 
-### URL --> ```/likes/:postId```
+### URL --> ```/likes/:bookId```
 
 ### Method --> ```PUT```
 
@@ -436,30 +374,3 @@ Content:
     message: "Something went wrong!"
 }
 ```
-
-
-
-
-<!-- users
-.post /register - register new user
-.post /login - login user
-.post /logout - logout user
-
-.get /profile - get user info
-.post /profile - post user info
-.put /profile - edit user info
-
-themes
-.get /themes - lists all themes
-.post /themes - create new theme only for registered users
-
-posts:
-.get themes/id - get all posts for theme
-.post themes/id - create post in theme by id only for registered users
-.put themes/id/posts/id - edit post only possible for author
-.delete themes/id/posts/id - delete post only possible for author -->
-
-
-<!-- http://localhost:3000/api/users/register --  {"name":"SomeName","email":"some@email.com","username":"someUsername","password":"12345","rePassword":"12345"} -->
-<!--http://localhost:3000/api/themes -- {"themeName":"Some Theme", "userId":"5f85bf709a517d36f4abe656", "post": "Some Post" } -->
-<!-- http://localhost:3000/api/themes/5f858dd2d895ad23602db9d4  -- {"userId":"5f8580d25d1da62568dd38fd", "postText": "Some Post textsdfasdf" } -->

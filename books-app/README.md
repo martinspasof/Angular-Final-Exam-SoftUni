@@ -1,3 +1,6 @@
+# Angular-Final-Exam-SoftUni
+Angular Final Exam SoftUni Repo
+
 # BooksApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
@@ -6,13 +9,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
 ## DB
+Mongo DB books dump
 
-Mogoose DB books
+## mongodb startup (Linux)
+systemctl start mongod
+
+## Crud operations
+Create, Read, Update and Delete Books
 
 ## Rest API (directory) - change backend for book app
 
