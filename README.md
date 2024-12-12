@@ -22,6 +22,3 @@ Create, Read, Update and Delete Books
 
 Run `node index` to start server (http://localhost:3000/).
 
-```
-I will continue working on my project until the end of 11-Dec-2024 (23:59h).
-```
